@@ -2,6 +2,7 @@ import argparse
 import logging
 
 from social_media_pipeline import pipeline_factory
+from transform import transformation_factory
 from utils.db import db_factory
 
 
