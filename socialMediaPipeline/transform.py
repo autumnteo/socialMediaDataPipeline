@@ -15,6 +15,16 @@ def no_transformation(
 def random_choice_filter(
     social_data: List[SocialMediaData],
 ) -> List[SocialMediaData]:
+    """Function to filter social media data, by only keeping the
+    posts with number of comments greater than 2 standard deviations
+    away from the mean number of comments.
+
+    Args:
+        social_data (List[SocialMediaData]): List of social media post data.
+
+    Returns:
+        List[SocialMediaData]: Filtered list of social media post data.
+    """
     logging.info('Randomly choosing 2 social media data points.')
     return random.choices(social_data, k=2)
 
@@ -22,6 +32,16 @@ def random_choice_filter(
 def standard_deviation_outlier_filter(
     social_data: List[SocialMediaData],
 ) -> List[SocialMediaData]:
+    """Function to filter social media data, by only keeping the
+    posts with number of comments greater than 2 standard deviations
+    away from the mean number of comments.
+
+    Args:
+        social_data (List[SocialMediaData]): List of social media post data.
+
+    Returns:
+        List[SocialMediaData]: Filtered list of social media post data.
+    """
     logging.info(
         'Filtering social media data based on Standard Deviation Outlier'
         ' algorithm.'
