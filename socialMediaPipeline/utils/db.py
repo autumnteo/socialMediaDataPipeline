@@ -4,8 +4,9 @@ from typing import Iterator
 
 
 class DatabaseConnection:
+    """Class to manage database connections"""
     def __init__(
-        self, db_type: str = 'sqlite3', db_file: str = 'data/socialetl.db'
+        self, db_type: str = 'sqlite3', db_file: str = 'data/socialMediaPipeline.db'
     ) -> None:
         self._db_type = db_type
         self._db_file = db_file
@@ -27,6 +28,6 @@ class DatabaseConnection:
 
 
 def db_factory(
-    db_type: str = 'sqlite3', db_file: str = 'data/socialetl.db'
+    db_type: str = 'sqlite3', db_file: str = 'data/socialMediaPipeline.db'
 ) -> DatabaseConnection:
     return DatabaseConnection(db_type=db_type, db_file=db_file)
