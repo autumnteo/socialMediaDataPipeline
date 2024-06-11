@@ -207,7 +207,7 @@ class RedditPipeline(SocialMediaPipeline):
         id: str = 'dataengineering',
         num_records: int = 100,
     ):
-        """Function to run the ETL pipeline.
+        """Function to run the pipeline pipeline.
 
         Args:
             db_cursor_context (DatabaseConnection): Database connection.
@@ -346,7 +346,7 @@ class TwitterPipeline(SocialMediaPipeline):
         id: str = 'startdataeng',
         num_records: int = 100,
     ):
-        """Function to run the ETL pipeline.
+        """Function to run the pipeline pipeline.
 
         Args:
             db_cursor_context (DatabaseConnection): Database connection.

@@ -2,7 +2,7 @@ import json
 from typing import List
 
 import pytest
-from socialMediaPipeline.social_media_pipeline import SocialMediaData, TwitterTweetData, etl_factory
+from socialMediaPipeline.social_media_pipeline import SocialMediaData, TwitterTweetData, pipeline_factory
 from socialMediaPipeline.transform import transformation_factory
 from socialMediaPipeline.utils.db import DatabaseConnection
 
@@ -41,10 +41,10 @@ class TestTwitterPipeline:
             objects that replicate what we get from the extract method.
         """
         # Create a TwitterPipeline object
-        _, twitter_etl = etl_factory('twitter')
+        _, twitter_pipeline = pipeline_factory('twitter')
         # Call the transform method on the TwitterPipeline object
         # and pass in the mock
-        transformed_data = twitter_etl.transform(
+        transformed_data = twitter_pipeline.transform(
             mock_twitter_data, transformation_factory('no_tx')
         )
         # Assert that the transformed data is a
@@ -81,16 +81,16 @@ class TestTwitterPipeline:
             objects that replicate what we get from the extract method.
         """
         # Create a TwitterPipeline object
-        _, twitter_etl = etl_factory('twitter')
+        _, twitter_pipeline = pipeline_factory('twitter')
         # Call the transform method on the TwitterPipeline object
         # and pass in the mock
-        transformed_data = twitter_etl.transform(
+        transformed_data = twitter_pipeline.transform(
             mock_twitter_data, transformation_factory('no_tx')
         )
         db_cursor_context = DatabaseConnection(
             db_file="data/test.db"
         ).managed_cursor()
-        twitter_etl.load(
+        twitter_pipeline.load(
             social_data=transformed_data,
             db_cursor_context=db_cursor_context,
         )

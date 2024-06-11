@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import List
 
 import pytest
-from socialMediaPipeline.social_media_pipeline import RedditPostData, SocialMediaData, etl_factory
+from socialMediaPipeline.social_media_pipeline import RedditPostData, SocialMediaData, pipeline_factory
 from socialMediaPipeline.transform import transformation_factory
 from socialMediaPipeline.utils.db import db_factory
 
@@ -48,10 +48,10 @@ class TestRedditPipeline:
             objects that replicate what we get from the extract method.
         """
         # Create a RedditPipeline object
-        _, reddit_etl = etl_factory('reddit')
+        _, reddit_pipeline = pipeline_factory('reddit')
         # Call the transform method on the RedditPipeline object
         # and pass in the mock
-        transformed_data = reddit_etl.transform(
+        transformed_data = reddit_pipeline.transform(
             mock_reddit_data,
             transformation_factory('sd'),
         )
@@ -68,17 +68,17 @@ class TestRedditPipeline:
             objects that replicate what we get from the extract method.
         """
         # Create a RedditPipeline object
-        _, reddit_etl = etl_factory('reddit')
+        _, reddit_pipeline = pipeline_factory('reddit')
         # Call the transform method on the RedditPipeline object
         # and pass in the mock
-        transformed_data = reddit_etl.transform(
+        transformed_data = reddit_pipeline.transform(
             mock_reddit_data,
             transformation_factory('no_tx'),
         )
         # Call the load method on the RedditPipeline object
         # and pass in the transformed data
         db = db_factory(db_file="data/test.db")
-        reddit_etl.load(
+        reddit_pipeline.load(
             transformed_data, db_cursor_context=db.managed_cursor()
         )
         # Read social_posts table from database
